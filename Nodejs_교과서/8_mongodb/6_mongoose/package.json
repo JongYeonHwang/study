@@ -1,0 +1,18 @@
+{
+  "name": "6_mongoose",
+  "version": "1.0.0",
+  "description": "8.6 mongodb 배우기 mongoose ( ODM )",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.2",
+    "morgan": "^1.10.0",
+    "nunjucks": "^3.2.3"
+  }
+}

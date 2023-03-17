@@ -21,3 +21,5 @@ User.associate(db);
 Comment.associate(db);
 
 module.exports = db;
+
+// index.js 를 통해 db 로 export 하지않고 직접 모델끼리 참조하게되면 순환참조가 일어나게 된다.
