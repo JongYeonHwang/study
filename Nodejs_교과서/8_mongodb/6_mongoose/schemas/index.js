@@ -8,16 +8,16 @@ const connect = () => {
         mongoose.set('debug', true);
     }
 
-    mongoose.connect('mongodb://root:theswing@localhost:27017/admin', {
+    mongoose.connect('mongodb://root:theswing1234@localhost:27017/admin', {
         dbName: 'nodejs',
         useNewUrlParser: true,
-    }, (error) => {
-        if (error) {
-            console.log('몽고디비 연결 에러', error);
-        } else {
-            console.log('몽고디비 연결 성공');
-        }
-    });
+    })
+    .then(() => {
+        console.log('몽고디비 연결 성공')
+    })
+    .catch(() => {
+        console.log('몽고디비 연결 에러', error);
+    })
 };
 
 mongoose.connection.on('error', (error) => {
