@@ -1,0 +1,19 @@
+{
+  "name": "card_game_server",
+  "version": "0.0.1",
+  "description": "스노우볼스 미니프로젝트(개인) 카드게임 서버 (express)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "author": "Nors",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.2.0",
+    "sequelize": "^6.29.3",
+    "sequelize-cli": "^6.6.0"
+  }
+}
