@@ -1,0 +1,21 @@
+session을 관리하는 프로그램 Redis
+JWT에 관해 많은 공부
+일단 AWS 책 읽기
+AWS lambda 서비스 와 로그인에 대해서 찾아보기
+snowballs 알파 베타 버전관리에 lambda를 사용하고있다?
+SVN이란 형상관리 툴, 그렇기 때문에 1.1 에서 1.2로 바뀌었을 때 처럼 여러 버전을 관리하기 위한 방법으로써 lambda를 활용 한 서버관리가 있을 수 있음
+
+
+와우는 JWT의 Access, refresh 방식이 아닐까? - 자리비움하면 접속종료
+
+Access Token과 refresh Token은 꼭 JWT인것은 아님..
+
+https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-Stateful-Stateless-%EC%A0%95%EB%A6%AC - stateless와 stateful의 차이
+
+https://hudi.blog/refresh-token/ - Access Token의 문제점과 refresh Token
+
+https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-JWTjson-web-token-%EB%9E%80-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC - JWT 정리 ( cookie-session 인증방식 포함)
+
+https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-Access-Token-Refresh-Token-%EC%9B%90%EB%A6%AC-feat-JWT - AccessToken과 RefreshToken을 쓰는 이유와 프로세스
+
+https://inpa.tistory.com/entry/AWS-%F0%9F%93%9A-%EB%9E%8C%EB%8B%A4Lambda-%EA%B0%9C%EB%85%90-%EC%9B%90%EB%A6%AC - AWS의 Lambda 서비스에 대해
