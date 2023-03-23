@@ -2,8 +2,12 @@ session을 관리하는 프로그램 Redis
 JWT에 관해 많은 공부
 일단 AWS 책 읽기
 AWS lambda 서비스 와 로그인에 대해서 찾아보기
+Cygwin, VIEditor, bash shell(shell Script)
 snowballs 알파 베타 버전관리에 lambda를 사용하고있다?
 SVN이란 형상관리 툴, 그렇기 때문에 1.1 에서 1.2로 바뀌었을 때 처럼 여러 버전을 관리하기 위한 방법으로써 lambda를 활용 한 서버관리가 있을 수 있음
+
+catch에서 next(error)시에 return 하고 안하고 차이
+passport에서 LocalStrategy의 역할 - 로그인 전략 즉, controller나 route에서 auth.js 등 로그인 로직을 수행할 때 passport.authenticate 메서드 실행 시에 들어가는 콜백함수
 
 
 와우는 JWT의 Access, refresh 방식이 아닐까? - 자리비움하면 접속종료
