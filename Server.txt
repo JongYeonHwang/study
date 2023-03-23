@@ -8,6 +8,10 @@ SVN이란 형상관리 툴, 그렇기 때문에 1.1 에서 1.2로 바뀌었을 �
 
 와우는 JWT의 Access, refresh 방식이 아닐까? - 자리비움하면 접속종료
 
+웹소켓 방식 통신시 통신종료 할 때 setInterval등의 함수 종료도 해주지 않으면 메모리 누수가 일어나게 됨 이런 부분을 신경 쓸 수 있도록
+
+
+
 Access Token과 refresh Token은 꼭 JWT인것은 아님..
 
 https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-Stateful-Stateless-%EC%A0%95%EB%A6%AC - stateless와 stateful의 차이
@@ -19,3 +23,4 @@ https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-JWTjson-web-token-%EB%9E%80-%F0%
 https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-Access-Token-Refresh-Token-%EC%9B%90%EB%A6%AC-feat-JWT - AccessToken과 RefreshToken을 쓰는 이유와 프로세스
 
 https://inpa.tistory.com/entry/AWS-%F0%9F%93%9A-%EB%9E%8C%EB%8B%A4Lambda-%EA%B0%9C%EB%85%90-%EC%9B%90%EB%A6%AC - AWS의 Lambda 서비스에 대해
+
