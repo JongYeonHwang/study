@@ -1,0 +1,37 @@
+{
+  "name": "nodebird",
+  "version": "0.0.1",
+  "description": "10장 AWS와 GCP로 배포하기 - NodeBird",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server",
+    "start": "cross-env NODE_ENV=production PORT=80 pm2 start server.js -i 0"
+  },
+  "author": "Nors",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "connect-redis": "^7.0.1",
+    "cookie-parser": "^1.4.6",
+    "cross-env": "^7.0.3",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "helmet": "^6.0.1",
+    "hpp": "^0.2.3",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.2.0",
+    "nunjucks": "^3.2.3",
+    "passport": "^0.6.0",
+    "passport-kakao": "^1.0.1",
+    "passport-local": "^1.0.0",
+    "pm2": "^5.3.0",
+    "redis": "^4.6.5",
+    "sanitize-html": "^2.10.0",
+    "sequelize": "^6.29.3",
+    "sequelize-cli": "^6.6.0",
+    "winston": "^3.8.2"
+  }
+}
