@@ -117,6 +117,7 @@ function Card() {
                         setRevCnt(0);
                         // console.log('pair : ' + pair)
                         if(pair[0] === pair[1]){
+                            console.log('발동되면 안됨 2');
                             for(let i=0; i<showRev.length; i++){
                                 if(pair[0] == urls[i]){
                                     setReverse((prev) =>{
