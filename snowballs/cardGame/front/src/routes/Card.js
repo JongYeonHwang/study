@@ -1,14 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 function Card() {
 
+    const movePage = useNavigate();
     const level = useParams();
     const [urls, setUrls] = useState([]);
     const [reverse, setReverse] = useState([]);
     const [pair, setPair] = useState([null, null]);
     const [revCnt, setRevCnt] = useState(0);
-    const [showRev, setShowRev] = useState([]);
+    const [revStatus, setRevStatus] = useState([0,0]);
+    const [sec, setSec] = useState(0);
+    const [min, setMin] = useState(0);
+    const [hour, setHour] = useState(0);
 
     let amount = 1;
     switch(level.level){
@@ -27,23 +32,18 @@ function Card() {
     useEffect(() => {
         shuffle();
         showCard();
+
+        setInterval (() => {
+            setSec(sec => sec+1);
+        }, 1000);
     }, []);
-    useEffect(()=>{
-        console.log('reverse test : ' + reverse);
-        console.log('pair : ' + pair);
-        console.log('showRev : ' + showRev);
-        console.log('revCnt : ' + revCnt);
-        console.log('--------------------------')
-    }, [showRev])
     function shuffle() {
         const temp = [];
         const temp2 = [];
-        const temp3 = [];
         for(let i=0; i<2; i++){
             for(let j=1; j<=amount; j++){
                 temp.push(`${process.env.PUBLIC_URL}/img/card${j}.jpg`);
                 temp2.push(false);
-                temp3.push(false);
             }
         }
 
@@ -55,7 +55,6 @@ function Card() {
         }
         setUrls(temp);
         setReverse(temp2);
-        setShowRev(temp3);
     }
 
     function showCard() {
@@ -79,20 +78,25 @@ function Card() {
     }
 
     const changeCard = (e) => {
-        if(revCnt < 2){
-        if(e.target.dataset.type === 'front') {
-            if(pair[0] === null){
-            setPair((prev) => {
-                prev[0] = urls[e.target.dataset.key];
-                return [...prev];
-            });
-            setRevCnt(revCnt+1);
-            setReverse((prev) => {
-                prev[e.target.dataset.key] = true;
-                return [...prev];
-            });
+        if(revCnt === 0) {
+            if(e.target.dataset.type === 'front') {
+                setPair((prev) => {
+                    prev[0] = urls[e.target.dataset.key];
+                    return [...prev];
+                });
+                setRevCnt(revCnt+1);
+                setReverse((prev) => {
+                    prev[e.target.dataset.key] = true;
+                    return [...prev];
+                });
+                setRevStatus((prev) => {
+                    prev[0] = e.target.dataset.key;
+                    return [...prev];
+                });
+            }
         }
-            if(revCnt > 0) {
+        if(revCnt === 1) {
+            if(e.target.dataset.type === 'front') {
                 setPair((prev) => {
                     prev[1] = urls[e.target.dataset.key];
                     return [...prev];
@@ -102,43 +106,70 @@ function Card() {
                     prev[e.target.dataset.key] = true;
                     return [...prev];
                 });
-                if(pair[0] !== pair[1]){
-                    console.log('발동되면 안됨');
-                    setPair((prev) => {
-                        prev[0] = null;
-                        prev[1] = null;
+                setRevStatus((prev) => {
+                    prev[1] = e.target.dataset.key;
+                    return [...prev];
+                });
+            }
+        }
+        console.log(revCnt, pair, revStatus, reverse);
+    }
+
+    useEffect(() => {
+        reverseResult();
+    }, [pair]);
+
+    function reverseResult () {
+        if(pair[1] !== null) {
+            if(pair[0] === pair[1]) {
+                    setReverse((prev) => {
+                        prev[revStatus[0]] = true;
+                        prev[revStatus[1]] = true;
                         return [...prev];
                     });
-                    let confirmPair = setTimeout(() =>{
-                        // console.log('showRev : ' + showRev);
-                        setReverse(showRev);
-                        // console.log('reverse : ' + reverse);
-                        setPair([null, null]);
-                        setRevCnt(0);
-                        // console.log('pair : ' + pair)
-                        if(pair[0] === pair[1]){
-                            console.log('발동되면 안됨 2');
-                            for(let i=0; i<showRev.length; i++){
-                                if(pair[0] == urls[i]){
-                                    setReverse((prev) =>{
-                                        prev[i] = true;
-                                        return [...prev];
-                                    })
-                                }
-                            }
-                            setShowRev(reverse);
-                        }
-                    }, 2000);
-                }
+                    setRevStatus([0,0]);
+                    setRevCnt(0);
+            } else {
+                setTimeout(() => {
+                    setReverse((prev) => {
+                        prev[revStatus[0]] = false;
+                        prev[revStatus[1]] = false;
+                        return [...prev];
+                    });
+                    setRevStatus([0,0]);
+                    setRevCnt(0);
+                }, 2000)
             }
-            // console.log('revCnt : ' + revCnt);
-        } 
+            setPair((prev) => {
+                prev[0] = null;
+                prev[1] = null;
+                return [...prev];
+            })
+        }
     }
-    }    
+
+    useEffect(() => {
+        if(sec === 60) {
+            setSec(0);
+            setMin(min => min +1);
+        }
+        if(min === 60) {
+            setMin(0);
+            setHour(hour => hour +1);
+        }
+    }, [sec]);
+
+    useEffect(() => {
+        if(reverse.indexOf(false) === -1) {
+            if(sec > 5) {
+            movePage('/result', {hour : hour, min : min, sec: sec});
+            }
+        }
+    },[reverse]);    
 
     return(
         <>
-            <h1>00:00:00</h1>
+            <h1>{hour}:{min}:{sec}</h1>
             {reverse.map((rev, index) => (
                     <img key={index} data-key={index} data-type={rev ? 'back' : 'front'} src={rev ? urls[index] : `${process.env.PUBLIC_URL}/img/front_image.jpg`} onClick={changeCard}
                         style={{width:'150px', height:'250px'}} alt={`card${index}`}/>      
