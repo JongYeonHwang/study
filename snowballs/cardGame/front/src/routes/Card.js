@@ -162,7 +162,8 @@ function Card() {
     useEffect(() => {
         if(reverse.indexOf(false) === -1) {
             if(sec > 5) {
-            movePage('/result', {hour : hour, min : min, sec: sec});
+            movePage('/result', { state:{hour : hour, min : min, sec: sec,}});
+            // 닉네임, 레벨 포함시켜서 보내기
             }
         }
     },[reverse]);    
@@ -174,7 +175,6 @@ function Card() {
                     <img key={index} data-key={index} data-type={rev ? 'back' : 'front'} src={rev ? urls[index] : `${process.env.PUBLIC_URL}/img/front_image.jpg`} onClick={changeCard}
                         style={{width:'150px', height:'250px'}} alt={`card${index}`}/>      
             ))}
-            <button><Link to={`/result`}>Start</Link></button>
         </>
     );
 }
