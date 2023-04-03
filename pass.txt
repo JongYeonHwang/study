@@ -4,3 +4,5 @@ mysql
 
 우분투
 nors / theswingnors
+
+root pass / OThwQ97Phk

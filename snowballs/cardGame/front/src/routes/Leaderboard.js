@@ -6,7 +6,7 @@ function Leaderboard() {
 
     const { hour, min, sec, nick, level } = useLocation().state;
 
-    axios.get('/leaderboard', {
+    axios.post('/leaderboard', {
         params: {
             nick: nick,
             time: hour,
