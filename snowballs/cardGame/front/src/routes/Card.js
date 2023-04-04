@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 
 function Card() {
 
     const movePage = useNavigate();
     const level = useParams();
+    const location = useLocation();
     const [urls, setUrls] = useState([]);
     const [reverse, setReverse] = useState([]);
     const [pair, setPair] = useState([null, null]);
@@ -14,6 +15,7 @@ function Card() {
     const [sec, setSec] = useState(0);
     const [min, setMin] = useState(0);
     const [hour, setHour] = useState(0);
+    const nick = location.state.nick;
 
     let amount = 1;
     switch(level.level){
@@ -162,7 +164,7 @@ function Card() {
     useEffect(() => {
         if(reverse.indexOf(false) === -1) {
             if(sec > 5) {
-            movePage('/result', { state:{hour : hour, min : min, sec: sec,}});
+            movePage('/result', { state:{hour : hour, min : min, sec: sec, nick: nick, level: level.level}});
             // 닉네임, 레벨 포함시켜서 보내기
             }
         }
@@ -175,6 +177,7 @@ function Card() {
                     <img key={index} data-key={index} data-type={rev ? 'back' : 'front'} src={rev ? urls[index] : `${process.env.PUBLIC_URL}/img/front_image.jpg`} onClick={changeCard}
                         style={{width:'150px', height:'250px'}} alt={`card${index}`}/>      
             ))}
+            <h1>{nick}</h1>
         </>
     );
 }

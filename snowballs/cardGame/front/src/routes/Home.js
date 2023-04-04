@@ -4,6 +4,7 @@ import { useState } from 'react';
 function Home() {
 
     const [level, setLevel] = useState('Low');
+    const [nick, setNick ] = useState('');
 
     const onClick = (e) => {
         let way = e.target.className;
@@ -14,6 +15,10 @@ function Home() {
         }
     };
 
+    const nickName = (e) => {
+        setNick(e.target.value);
+    }
+
     return (
         <>
         <h1>Welcome</h1>
@@ -21,8 +26,9 @@ function Home() {
         <button className='left' onClick={onClick}>◀︎</button>
         <span>{level}</span>
         <button className='right' onClick={onClick}>►</button>
+        <input type='text' onChange={nickName}/>
         </div>
-        <Link to={`/${level}`}>Start</Link>
+        <Link to={`/${level}`} state={{nick : nick}}>Start</Link>
         </>
     );
 }

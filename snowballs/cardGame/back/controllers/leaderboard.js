@@ -9,9 +9,8 @@ exports.leaderboard = async (req, res, next) => {
             where: {
                 level
             },
-            order: [['time', 'ASC']],
         });
-        res.render('result', {scoreBoard});
+        res.send({scoreBoard});
         
     } catch (error) {
         console.error(error);

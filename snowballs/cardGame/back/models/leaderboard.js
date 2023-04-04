@@ -19,7 +19,7 @@ class Leaderboard extends Sequelize.Model {
             },
         }, {
             sequelize,
-            timestamps: true,
+            timestamps: false,
             underscored: false,
             modelName: 'Leaderboard',
             tableName: 'leaderboards',
