@@ -5,32 +5,50 @@ import axios from 'axios';
 function Leaderboard() {
 
     const { hour, min, sec, nick, level } = useLocation().state;
-    const { test, setTest } = useState([]);
-
-        axios.post('http://localhost:8001/leaderboard', {
+    const [ rate, setRate ] = useState(null);
+    const [ result, setResult ] = useState([]);
+    
+    useEffect(() => {
+    const temp= [];
+    axios.post('http://localhost:8001/leaderboard', {
         nick: nick,
         level: level,
         time: `${hour}${min}${sec}`,
     })
         .then((res) => {
-            console.log(res.data);
-            setTest(res.data.data);
-            console.log(test);
+            setRate(res.data.scoreBoard);
+            for(let i=0; i<res.data.scoreBoard.length; i++){
+                temp.push(res.data.scoreBoard[i]);
+            }
+            setResult(temp);
         })
         .catch((err) => {
             console.error(err);
         });
+        setResult(temp);
+    },[]);
 
+    if(rate != null) {
     return(
         <>
             <h1>ClearTime!</h1>
+            <h1>{hour}:{min}:{sec}</h1>
+            <hr/>
             <h1>Leaderboard</h1>
-            {/* {rate.map((rev, index) => (
-                    <img key={index} data-key={index} data-type={rev ? 'back' : 'front'} src={rev ? urls[index] : `${process.env.PUBLIC_URL}/img/front_image.jpg`} onClick={changeCard}
-                        style={{width:'150px', height:'250px'}} alt={`card${index}`}/>       
-            ))}  */}
+            {rate.map((rev, index) => (
+                    <table key={index}>
+                        <tbody>
+                            <tr>
+                                <td>{index+1}</td>
+                                <td>{rev.nick}</td>
+                                <td>{rev.time}</td>
+                            </tr>
+                        </tbody>
+                    </table>      
+            ))}
         </>
     );
+    }
 }
 
 export default Leaderboard;
