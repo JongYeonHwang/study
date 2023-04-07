@@ -6,7 +6,6 @@ function Leaderboard() {
 
     const { hour, min, sec, nick, level } = useLocation().state;
     const [ rate, setRate ] = useState(null);
-    const [ result, setResult ] = useState([]);
     
     useEffect(() => {
     const temp= [];
@@ -20,12 +19,10 @@ function Leaderboard() {
             for(let i=0; i<res.data.scoreBoard.length; i++){
                 temp.push(res.data.scoreBoard[i]);
             }
-            setResult(temp);
         })
         .catch((err) => {
             console.error(err);
         });
-        setResult(temp);
     },[]);
 
     if(rate != null) {

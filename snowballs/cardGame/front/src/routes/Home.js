@@ -26,9 +26,9 @@ function Home() {
         <button className='left' onClick={onClick}>◀︎</button>
         <span>{level}</span>
         <button className='right' onClick={onClick}>►</button>
-        <input type='text' onChange={nickName}/>
+        <input type='text' onChange={nickName} required/>
         </div>
-        <Link to={`/${level}`} state={{nick : nick}}>Start</Link>
+        {nick ? <Link to={`/${level}`} state={{nick : nick}}>Start</Link> : null}
         </>
     );
 }
