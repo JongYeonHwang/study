@@ -26,9 +26,9 @@ function Home() {
         <button className='left' onClick={onClick}>◀︎</button>
         <span>{level}</span>
         <button className='right' onClick={onClick}>►</button>
-        <input type='text' onChange={nickName} required/>
+        <input type='text' onChange={nickName} required maxLength={10}/>
         </div>
-        {nick ? <Link to={`/${level}`} state={{nick : nick}}>Start</Link> : null}
+        {nick ? <Link to={`/${level}`} state={{nick : nick}}>Start</Link> : '이름을 입력해주세요'}
         </>
     );
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 
 function Card() {
 
@@ -34,11 +35,12 @@ function Card() {
     useEffect(() => {
         shuffle();
         showCard();
-
         setInterval (() => {
             setSec(sec => sec+1);
         }, 1000);
+
     }, []);
+
     function shuffle() {
         const temp = [];
         const temp2 = [];
@@ -68,7 +70,6 @@ function Card() {
         const firstShow = setInterval(()=> {
             setReverse((prev)=>{
                 prev[cnt] = true;
-                console.log(prev)
                 return [...prev];
             }) 
             cnt++;
@@ -114,7 +115,6 @@ function Card() {
                 });
             }
         }
-        console.log(revCnt, pair, revStatus, reverse);
     }
 
     useEffect(() => {
@@ -163,9 +163,19 @@ function Card() {
 
     useEffect(() => {
         if(reverse.indexOf(false) === -1) {
-            if(sec > 5) {
-            movePage('/result', { state:{hour : hour, min : min, sec: sec, nick: nick, level: level.level}});
-            // 닉네임, 레벨 포함시켜서 보내기
+            if(sec > 4) {
+
+                axios.post('http://localhost:8001/leaderboard/clear', {
+                    nick: nick,
+                    time: `${hour}${min}${sec}`,
+                    level: level.level,
+                })
+                    .then(() => {
+                        movePage('/result', { state:{hour : hour, min : min, sec: sec, nick: nick, level: level.level}});
+                })
+                    .catch((err) => {
+                        console.error(err);
+                });
             }
         }
     },[reverse]);    
@@ -177,7 +187,6 @@ function Card() {
                     <img key={index} data-key={index} data-type={rev ? 'back' : 'front'} src={rev ? urls[index] : `${process.env.PUBLIC_URL}/img/front_image.jpg`} onClick={changeCard}
                         style={{width:'150px', height:'250px'}} alt={`card${index}`}/>      
             ))}
-            <h1>{nick}</h1>
         </>
     );
 }

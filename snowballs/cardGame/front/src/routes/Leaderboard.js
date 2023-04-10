@@ -4,15 +4,13 @@ import axios from 'axios';
 
 function Leaderboard() {
 
-    const { hour, min, sec, nick, level } = useLocation().state;
+    const { hour, min, sec, level } = useLocation().state;
     const [ rate, setRate ] = useState(null);
     
     useEffect(() => {
     const temp= [];
     axios.post('http://localhost:8001/leaderboard', {
-        nick: nick,
-        level: level,
-        time: `${hour}${min}${sec}`,
+        level: level
     })
         .then((res) => {
             setRate(res.data.scoreBoard);
