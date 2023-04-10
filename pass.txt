@@ -1,8 +1,0 @@
-mysql
-회사 : theswing1234
-집 : rootnors
-
-우분투
-nors / theswingnors
-
-root pass / OThwQ97Phk
