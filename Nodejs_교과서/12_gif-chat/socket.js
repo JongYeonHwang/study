@@ -28,6 +28,7 @@ module.exports = (server, app, sessionMiddleware) => {
                 user: 'system',
                 chat: `${socket.request.session.color}님이 입장하셨습니다.`,
             });
+            console.log(socket);
         });
 
         socket.on('disconnect', async () => {
